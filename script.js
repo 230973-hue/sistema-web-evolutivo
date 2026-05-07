@@ -2,6 +2,8 @@ const formulario = document.getElementById("contactForm");
 
 const listaContactos = document.getElementById("listaContactos");
 
+const mensaje = document.getElementById("mensaje");
+
 let contactos = [];
 
 formulario.addEventListener("submit", function(e){
@@ -13,6 +15,14 @@ formulario.addEventListener("submit", function(e){
   const telefono = document.getElementById("telefono").value;
 
   const correo = document.getElementById("correo").value;
+
+  if(nombre === "" || telefono === "" || correo === ""){
+
+    mostrarMensaje("Todos los campos son obligatorios","red");
+
+    return;
+
+  }
 
   const contacto = {
     id: Date.now(),
@@ -26,6 +36,8 @@ formulario.addEventListener("submit", function(e){
   mostrarContactos();
 
   formulario.reset();
+
+  mostrarMensaje("Contacto agregado","green");
 
 });
 
@@ -60,5 +72,21 @@ function eliminarContacto(id){
   contactos = contactos.filter(contacto => contacto.id !== id);
 
   mostrarContactos();
+
+  mostrarMensaje("Contacto eliminado","red");
+
+}
+
+function mostrarMensaje(texto,color){
+
+  mensaje.textContent = texto;
+
+  mensaje.style.color = color;
+
+  setTimeout(() => {
+
+    mensaje.textContent = "";
+
+  },3000);
 
 }
