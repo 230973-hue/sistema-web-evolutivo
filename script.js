@@ -15,6 +15,7 @@ formulario.addEventListener("submit", function(e){
   const correo = document.getElementById("correo").value;
 
   const contacto = {
+    id: Date.now(),
     nombre,
     telefono,
     correo
@@ -42,10 +43,22 @@ function mostrarContactos(){
       <h3>${contacto.nombre}</h3>
       <p>${contacto.telefono}</p>
       <p>${contacto.correo}</p>
+
+      <button onclick="eliminarContacto(${contacto.id})">
+        Eliminar
+      </button>
     `;
 
     listaContactos.appendChild(tarjeta);
 
   });
+
+}
+
+function eliminarContacto(id){
+
+  contactos = contactos.filter(contacto => contacto.id !== id);
+
+  mostrarContactos();
 
 }
